@@ -6,7 +6,7 @@ class GraphTool < Formula
   url "https://downloads.skewed.de/graph-tool/graph-tool-2.35.tar.bz2"
   sha256 "2395823c33d4d12cc8465782a640b99ec7bddf074a7a02e9c1eab4eb3f8ce9ba"
   license "LGPL-3.0"
-  revision 1
+  revision 3
 
   livecheck do
     url "https://downloads.skewed.de/graph-tool/"
@@ -14,9 +14,9 @@ class GraphTool < Formula
   end
 
   bottle do
-    sha256 "0d40bb0f5e363b7ac05844dc54b8c1e3f521a2ecb39b977967ecd46d9a896e0f" => :big_sur
-    sha256 "a40bb74bb0f26997e70dbd3184b790e31c7803e4213f3162a457a2601de6d59f" => :catalina
-    sha256 "0701551b1f3fcab3422338343a90638081b83f8bddf4e8101c7250e14e5ed6ba" => :mojave
+    sha256 "7b306992341901769282d80ae82de613fdbe9091cad02f17a0bb72adc52cc301" => :big_sur
+    sha256 "1f0882fe071c1784cd723bd6c8fbf0b684803d3a51d3fb0d88bd5a9f95f11ebc" => :catalina
+    sha256 "b23c8ca241e78a0cf6aa882284f64580329121874c37b0142772a4bc9c60c323" => :mojave
   end
 
   depends_on "autoconf" => :build
@@ -25,7 +25,7 @@ class GraphTool < Formula
   depends_on "pkg-config" => :build
   depends_on "boost"
   depends_on "boost-python3"
-  depends_on "cairomm"
+  depends_on "cairomm@1.14"
   depends_on "cgal"
   depends_on "google-sparsehash"
   depends_on "gtk+3"

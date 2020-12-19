@@ -3,8 +3,7 @@ class Osquery < Formula
   homepage "https://osquery.io"
   url "https://github.com/facebook/osquery/archive/3.3.2.tar.gz"
   sha256 "74280181f45046209053a3e15114d93adc80929a91570cc4497931cfb87679e4"
-  # license ["Apache-2.0", "GPL-2.0-only"] - pending https://github.com/Homebrew/brew/pull/7953
-  license "Apache-2.0"
+  license any_of: ["Apache-2.0", "GPL-2.0-only"]
   revision 17
 
   bottle do
@@ -14,7 +13,7 @@ class Osquery < Formula
     sha256 "9c70ccbcc111293ceddc2421035cf6b0748709d96979c3db01a5d8dee1053db4" => :high_sierra
   end
 
-  disable! because: "has old, vendored dependencies and cannot use duplicated Homebrew libraries"
+  disable! date: "2020-05-18", because: "has old, vendored dependencies and cannot use duplicated Homebrew libraries"
 
   depends_on "bison" => :build
   depends_on "cmake" => :build

@@ -3,7 +3,8 @@ class Libglademm < Formula
   homepage "https://gnome.org"
   url "https://download.gnome.org/sources/libglademm/2.6/libglademm-2.6.7.tar.bz2"
   sha256 "38543c15acf727434341cc08c2b003d24f36abc22380937707fc2c5c687a2bc3"
-  revision 6
+  license "LGPL-2.1-or-later"
+  revision 9
 
   livecheck do
     url :stable
@@ -11,11 +12,9 @@ class Libglademm < Formula
 
   bottle do
     cellar :any
-    sha256 "81f7e576d0ff319df8a3e3ec10b03d9c389b2bc89801562a2b5b1b90f09fce8e" => :big_sur
-    sha256 "d123ccbbf9e8e599a6b889e3b02214b7556b9b205d1835cabb4259bf1520738d" => :catalina
-    sha256 "7198c6996d64bbe6a06380c23d010f0c9a949e3220c8a3dcb785fba0ceb22c33" => :mojave
-    sha256 "4daab6726178c96ac56452716422004dd4fcdfbaef22b85d99f9ddc317c88ea1" => :high_sierra
-    sha256 "6f7c8cbd127f333df690910aa8aa3561989679719bebbfb9d1d4c41a9821d57c" => :sierra
+    sha256 "8275875bd6c02dd8d34e138ff152e1d3b20a7d96b32e5e8f8055bca603f0a17f" => :big_sur
+    sha256 "bc1a20f5266861e5f053a6bb2b4f1deee115cded38370ed22dacb1e66c32ed53" => :catalina
+    sha256 "5b559cc66165130ca89c2b3117366e559f65bfde3b4b6dc2a42370f68aaa52b8" => :mojave
   end
 
   depends_on "pkg-config" => :build
@@ -46,13 +45,13 @@ class Libglademm < Formula
     atk = Formula["atk"]
     atkmm = Formula["atkmm"]
     cairo = Formula["cairo"]
-    cairomm = Formula["cairomm"]
+    cairomm = Formula["cairomm@1.14"]
     fontconfig = Formula["fontconfig"]
     freetype = Formula["freetype"]
     gdk_pixbuf = Formula["gdk-pixbuf"]
     gettext = Formula["gettext"]
     glib = Formula["glib"]
-    glibmm = Formula["glibmm"]
+    glibmm = Formula["glibmm@2.64"]
     gtkx = Formula["gtk+"]
     gtkmm = Formula["gtkmm"]
     harfbuzz = Formula["harfbuzz"]
@@ -65,6 +64,7 @@ class Libglademm < Formula
     flags = %W[
       -I#{atk.opt_include}/atk-1.0
       -I#{atkmm.opt_include}/atkmm-1.6
+      -I#{atkmm.opt_lib}/atkmm-1.6/include
       -I#{cairo.opt_include}/cairo
       -I#{cairomm.opt_include}/cairomm-1.0
       -I#{cairomm.opt_lib}/cairomm-1.0/include

@@ -1,10 +1,9 @@
 class GstPluginsUgly < Formula
   desc "Library for constructing graphs of media-handling components"
   homepage "https://gstreamer.freedesktop.org/"
-  url "https://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-1.18.1.tar.xz"
-  sha256 "18cd6cb829eb9611ca63cbcbf46aca0f0de1dd28b2df18caa2834326a75ff725"
+  url "https://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-1.18.2.tar.xz"
+  sha256 "a337a022ed472209b38cab5918dc2f4e7a6adc1f4afacd226a6345e5cb668bdb"
   license "LGPL-2.0-or-later"
-  revision 1
   head "https://gitlab.freedesktop.org/gstreamer/gst-plugins-ugly.git"
 
   livecheck do
@@ -13,10 +12,9 @@ class GstPluginsUgly < Formula
   end
 
   bottle do
-    sha256 "6b9873a83aa8abf05c00202db6598aca62ff62a152aa4a3ba4c3ad7d856187cc" => :big_sur
-    sha256 "b0cff8eebb5a86764b5a370a5896d93aeb030907df7cb564fb20c5855843a3da" => :catalina
-    sha256 "a6ba3f422f3d6b332e2159cdb752acc0a000b50611118301ad56dc4da614b045" => :mojave
-    sha256 "decba1dff60ae4c0f40bf9530deb2d04eb20c09e72af0f70a12dea8c40a21d7d" => :high_sierra
+    sha256 "cb86e77291ae8fddf9970104dd35692dd203700bb7478435eac7b7b69a1d9142" => :big_sur
+    sha256 "95a7a76aecfe472051a07be32cb7b76f8d340ae12f3d8f56fa1546d81bab2348" => :catalina
+    sha256 "a00090d74613bbe4bb3f22c9f2941364f97530ed0160c4888efc868af458969c" => :mojave
   end
 
   depends_on "meson" => :build
@@ -49,6 +47,8 @@ class GstPluginsUgly < Formula
   test do
     gst = Formula["gstreamer"].opt_bin/"gst-inspect-1.0"
     output = shell_output("#{gst} --plugin dvdsub")
+    assert_match version.to_s, output
+    output = shell_output("#{gst} --plugin x264")
     assert_match version.to_s, output
   end
 end

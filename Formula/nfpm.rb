@@ -1,17 +1,16 @@
 class Nfpm < Formula
   desc "Simple deb and rpm packager"
   homepage "https://nfpm.goreleaser.com/"
-  url "https://github.com/goreleaser/nfpm/archive/v1.10.1.tar.gz"
-  sha256 "253de7be378ba2177ff8cfca028b1a3a6095572df243292195280ad031ba9e3f"
+  url "https://github.com/goreleaser/nfpm/archive/v1.10.3.tar.gz"
+  sha256 "554b02fff1eb000a500bc5a0667c548bfebed6d70ee6daefa77a49f0748bf096"
   license "MIT"
   head "https://github.com/goreleaser/nfpm.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "7002218cc431f34e9b4268d64f47600ff099432b069f1b56db73cacbaf51ddf1" => :big_sur
-    sha256 "38209c4b5ed7cbc4953c562ca59d5d91b72cf600efc5374b1a4042f521e2023f" => :catalina
-    sha256 "d1a4dc256f216e6f88f5cf910329005891717e5d017a8d4cd9acb53ccec6a0c3" => :mojave
-    sha256 "bb076ea6caf5d5907f4b01e61f8db16bced292573f79b7cc6fdae2e6305d64b2" => :high_sierra
+    sha256 "cf8b5f031fe3f65b13b89f1af11a914baa4d4a698754760de4a0dc00442c99e0" => :big_sur
+    sha256 "ca8a56ed0694ee1e5a810835405d4b0c858d8495f2ef2785e4978f64879c45f6" => :catalina
+    sha256 "e1f213c3f27498cceb0a674b50bdbddaa964b6a403f8b1c513ce7fb52b9134fe" => :mojave
   end
 
   depends_on "go" => :build

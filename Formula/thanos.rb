@@ -1,15 +1,15 @@
 class Thanos < Formula
   desc "Highly available Prometheus setup with long term storage capabilities"
   homepage "https://thanos.io"
-  url "https://github.com/thanos-io/thanos/archive/v0.17.0.tar.gz"
-  sha256 "36c2bbe5f96d0032d7bdfb535132ed78652e4a16cb0b29711f0a7ad63f468ed3"
+  url "https://github.com/thanos-io/thanos/archive/v0.17.2.tar.gz"
+  sha256 "2281901e195b3749e9b9b2a95f74ee532ee0440ec884ab7579fd4892d3d21cf1"
   license "Apache-2.0"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "d9069ed484aec2f1649e6c4c754f310d06b04516fba6ac6a961f6e8becf8c635" => :big_sur
-    sha256 "03b5bd7d8a5b2f71874d6d6598a6ae22f13b1a3603f1334e77e2a35e44bd651e" => :catalina
-    sha256 "801caa715d91550fe5ec2a9a141d895185aabc5cfef1b662272d17a878718ed0" => :mojave
+    sha256 "6f2fbd69087dee0777b11140e76d038df0958b149eb55f7fd5d054d041603aea" => :big_sur
+    sha256 "a5f08fe706d2ca47d3042285f2570d2a6e3eddcebf05ccc2967e1ec515a4e620" => :catalina
+    sha256 "91ad245e91d9f0dd14f5647aedba22035d69f1ce6aeaed66f4aaa280d8743788" => :mojave
   end
 
   depends_on "go" => :build

@@ -16,7 +16,7 @@ class LibpqxxAT6 < Formula
 
   keg_only :versioned_formula
 
-  deprecate! because: :versioned_formula
+  deprecate! date: "2020-06-23", because: :versioned_formula
 
   depends_on "pkg-config" => :build
   depends_on "python@3.9" => :build
@@ -41,7 +41,7 @@ class LibpqxxAT6 < Formula
     EOS
     system ENV.cxx, "-std=c++11", "test.cpp", "-L#{lib}", "-lpqxx",
            "-I#{include}", "-o", "test"
-    # Running ./test will fail because there is no runnning postgresql server
+    # Running ./test will fail because there is no running postgresql server
     # system "./test"
   end
 end

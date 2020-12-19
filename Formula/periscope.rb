@@ -2,8 +2,8 @@ class Periscope < Formula
   desc "Organize and de-duplicate your files without losing data"
   homepage "https://github.com/anishathalye/periscope"
   url "https://github.com/anishathalye/periscope.git",
-    tag:      "v0.2.0",
-    revision: "d672bf60f4b59c1f54fa3c26aef75d0593615c40"
+      tag:      "v0.2.0",
+      revision: "d672bf60f4b59c1f54fa3c26aef75d0593615c40"
   license "GPL-3.0-only"
 
   bottle do
@@ -42,7 +42,7 @@ class Periscope < Formula
 
     # scan + summary is correct
     shell_output "#{bin}/psc scan 2>/dev/null"
-    summary = shell_output("#{bin}/psc summary").strip.split("\n").map { |l| l.strip.split(" ") }
+    summary = shell_output("#{bin}/psc summary").strip.split("\n").map { |l| l.strip.split }
     assert_equal [["tracked", "2"], ["unique", "1"], ["duplicate", "1"], ["overhead", "4", "B"]], summary
 
     # rm allows deleting dupes but not uniques

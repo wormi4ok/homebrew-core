@@ -1,21 +1,21 @@
 class Torchvision < Formula
   desc "Datasets, transforms, and models for computer vision"
   homepage "https://github.com/pytorch/vision"
-  url "https://github.com/pytorch/vision/archive/v0.8.1.tar.gz"
-  sha256 "c46734c679c99f93e5c06654f4295a05a6afe6c00a35ebd26a2cce507ae1ccbd"
+  url "https://github.com/pytorch/vision/archive/v0.8.2.tar.gz"
+  sha256 "9a866c3c8feb23b3221ce261e6153fc65a98ce9ceaa71ccad017016945c178bf"
   license "BSD-3-Clause"
 
   bottle do
-    cellar :any
-    sha256 "b7ea7ba92a690bfa11b27aa93d243529b1ce94e1a158640a9ae17426b3ae239c" => :catalina
-    sha256 "b03ed26442db0062b053b002d87c5d7fa6eba027ec0c4513308a4a7cc8531a93" => :mojave
-    sha256 "2c2c0792ddfa25e706f04d1339ea350cc44118cf57daaecf26d5d59442bc57e9" => :high_sierra
+    sha256 "0100b617cbf2d6558152c7c6b749dca9c040b77eb78e7b3fb6e05f24c87bb5c0" => :big_sur
+    sha256 "d66bb7cbe8121343ddeb88c1f52e01460cb130a062524f8ab073ad71da95498a" => :catalina
+    sha256 "6280671d16b1e72e75994dd9028dd69102176c7c5809ccbb2be16c90a2b602e8" => :mojave
   end
 
   depends_on "cmake" => :build
-  depends_on "python@3.9" => :build
   depends_on "jpeg"
+  depends_on "libpng"
   depends_on "libtorch"
+  depends_on "python@3.9"
 
   def install
     mkdir "build" do

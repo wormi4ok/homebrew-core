@@ -4,17 +4,18 @@ class Mysql < Formula
   url "https://cdn.mysql.com/Downloads/MySQL-8.0/mysql-boost-8.0.22.tar.gz"
   sha256 "ba765f74367c638d7cd1c546c05c14382fd997669bcd9680278e907f8d7eb484"
   license "GPL-2.0"
+  revision 1
 
   livecheck do
-    url "https://dev.mysql.com/downloads/mysql/"
-    regex(/href=.*?mysql[._-]v?(\d+.\d+.\d+)-/i)
+    url "https://dev.mysql.com/downloads/mysql/?tpl=files&os=src"
+    regex(/href=.*?mysql[._-](?:boost[._-])?v?(\d+(?:\.\d+)+)\.t/i)
   end
 
   bottle do
-    sha256 "076478446ddf88fc7da02797fca46b3aa09d64d7b18ac605291aad2f7aa78e76" => :big_sur
-    sha256 "b56dd0f401abab4a2dff51706e78b7b7fedb2d4bf747b24e45bbcd4418d13eec" => :catalina
-    sha256 "accf6653da818f660ea85f1334a347cebe9ccf75ed7e514f13709a33fc640324" => :mojave
-    sha256 "83348080be9653d33f42db9f5c49e1b5db2f12a5f041095e7acc68550bbcde5b" => :high_sierra
+    rebuild 1
+    sha256 "4032192bba2d0aa3433573019c8b4b6566e9c0aa2f69a493e141cc15f53de63b" => :big_sur
+    sha256 "42239a4ab5d73f7ba533cefd0065566e9a68ae8faf977966103b20f80c1fe9d5" => :catalina
+    sha256 "ba3267e7fad1b6e2c991a1dc40d2b4177c554a6ae7734fc7c33c3cc26f4d327e" => :mojave
   end
 
   depends_on "cmake" => :build
@@ -102,6 +103,8 @@ class Mysql < Formula
   end
 
   def post_install
+    return if ENV["CI"]
+
     # Make sure the datadir exists
     datadir.mkpath
     unless (datadir/"mysql/general_log.CSM").exist?

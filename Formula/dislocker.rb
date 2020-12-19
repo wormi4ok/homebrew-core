@@ -4,7 +4,7 @@ class Dislocker < Formula
   url "https://github.com/Aorimn/dislocker/archive/v0.7.1.tar.gz"
   sha256 "742fb5c1b3ff540368ced54c29eae8b488ae5a5fcaca092947e17c2d358a6762"
   license "GPL-2.0"
-  revision 4
+  revision 5
 
   bottle do
     sha256 "e0049b9ff51ad9f3e4008df1edac9b52aa0d8df55e119990553b4d9cec651b90" => :catalina
@@ -12,7 +12,7 @@ class Dislocker < Formula
     sha256 "2b1e50229eb344c432db6cc35fd42b6e91d713f97f81d6f5067087f5c59b6cb3" => :high_sierra
   end
 
-  deprecate! because: "requires FUSE"
+  deprecate! date: "2020-11-10", because: "requires FUSE"
 
   depends_on "cmake" => :build
   depends_on "mbedtls"

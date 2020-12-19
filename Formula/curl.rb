@@ -1,8 +1,8 @@
 class Curl < Formula
   desc "Get a file from an HTTP, HTTPS or FTP server"
   homepage "https://curl.haxx.se/"
-  url "https://curl.haxx.se/download/curl-7.73.0.tar.bz2"
-  sha256 "cf34fe0b07b800f1c01a499a6e8b2af548f6d0e044dca4a29d88a4bee146d131"
+  url "https://curl.haxx.se/download/curl-7.74.0.tar.bz2"
+  sha256 "0f4d63e6681636539dc88fa8e929f934cd3a840c46e0bf28c73be11e521b77a5"
   license "curl"
 
   livecheck do
@@ -11,11 +11,9 @@ class Curl < Formula
   end
 
   bottle do
-    cellar :any
-    sha256 "fd9b2ae4a0d112bcef3e8e51cfce9b77fab587c50655d727b09b0f48daccb071" => :big_sur
-    sha256 "98f3bd49f4eae8638edc391afdbc57433d81e749e310a069d670e12f5941a4ce" => :catalina
-    sha256 "dc41d1f29bc7d8b7c89b3526a426cdab854e8d56b4c686d187e4995adbd092e3" => :mojave
-    sha256 "ec6ba585b8bbcb5c17feb51efcf8df1048318368376bd7142b6a047374c010e5" => :high_sierra
+    sha256 "4e85f5e083888ddb215cc7cb445748b5a35baf1853214b2d9ef11ba2c1cc89e0" => :big_sur
+    sha256 "35edb3fd3ce31448b290ce441d43235d004e36de4b8f299e8a5c2e2b5118b7fe" => :catalina
+    sha256 "36496011f345bd36b4ca83aca7bca3efbc5d30da0b7b039ab847b64aca5ca48d" => :mojave
   end
 
   head do
@@ -29,24 +27,38 @@ class Curl < Formula
   keg_only :provided_by_macos
 
   depends_on "pkg-config" => :build
+  depends_on "brotli"
+  depends_on "libidn2"
+  depends_on "libmetalink"
+  depends_on "libssh2"
+  depends_on "nghttp2"
+  depends_on "openldap"
+  depends_on "openssl@1.1"
+  depends_on "rtmpdump"
+  depends_on "zstd"
 
   uses_from_macos "zlib"
-
-  on_linux do
-    depends_on "openssl@1.1"
-  end
 
   def install
     system "./buildconf" if build.head?
 
+    openssl = Formula["openssl@1.1"]
     args = %W[
       --disable-debug
       --disable-dependency-tracking
       --disable-silent-rules
       --prefix=#{prefix}
+      --with-ssl=#{openssl.opt_prefix}
+      --with-ca-bundle=#{openssl.pkgetc}/cert.pem
+      --with-ca-path=#{openssl.pkgetc}/certs
       --with-secure-transport
-      --without-ca-bundle
-      --without-ca-path
+      --with-default-ssl-backend=openssl
+      --with-gssapi
+      --with-libidn2
+      --with-libmetalink
+      --with-librtmp
+      --with-libssh2
+      --without-libpsl
     ]
 
     system "./configure", *args

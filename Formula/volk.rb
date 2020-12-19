@@ -3,16 +3,15 @@ class Volk < Formula
 
   desc "Vector Optimized Library of Kernels"
   homepage "https://libvolk.org"
-  url "https://github.com/gnuradio/volk/releases/download/v2.3.0/volk-2.3.0.tar.xz"
-  sha256 "40645886d713ed23295d7fb3e69734b5173a22259886b1a4abdad229a44123b9"
+  url "https://github.com/gnuradio/volk.git",
+      tag:      "v2.4.1",
+      revision: "797b0ac846858d081fbb53ed50e98765ec9cb6b2"
   license "GPL-3.0-or-later"
-  revision 1
 
   bottle do
-    sha256 "b7441460759ea94e1045325beb3d62e5d97e4d11bc80e60ace2242b225b13496" => :big_sur
-    sha256 "863d6958c08b8f7bbe556c6435f086d7b8175eef7cc78c9f86abb78d27a6f493" => :catalina
-    sha256 "f46852e225b61a10b6c36962298f88f6b17f707426f10052454ff8e497300ac9" => :mojave
-    sha256 "cb355f044c6a69ef69f0375c57d2bf22ecd723dc1189a10cefd1466e5a0ee0d4" => :high_sierra
+    sha256 "0324fc38e4ca9a378fa863af8543af8dbfd2eb83a4a22e008f5df434857b655a" => :big_sur
+    sha256 "96cdb958c8c97d9ddc96b3aee4aff3101952183c034f9a4d5b750a157756e693" => :catalina
+    sha256 "2cc90d04c112cf63c00b8f39c6e3ba297f963b3266ddd144b2924df7519e6e56" => :mojave
   end
 
   depends_on "cmake" => :build

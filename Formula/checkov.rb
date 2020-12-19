@@ -3,15 +3,16 @@ class Checkov < Formula
 
   desc "Prevent cloud misconfigurations during build-time for IaC tools"
   homepage "https://www.checkov.io/"
-  url "https://files.pythonhosted.org/packages/04/e9/001dfd0b58dbec19300502609e818711055a5de7d7da402a0a5f832e71a5/checkov-1.0.636.tar.gz"
-  sha256 "90bc408c25e5fa8e6d37521eb1740a6c93fdaa5956ddf6d88390958473b91bc3"
+  # checkov should only be updated every 15 releases on multiples of 15
+  url "https://files.pythonhosted.org/packages/04/01/398e75345665f9eab97c4ee5f193d2472305446f866f6ba8fdb97a8d4d78/checkov-1.0.660.tar.gz"
+  sha256 "d767ad29642342f238bec9f1002e5f815e4a93f96bc76994abdcdefb9841ec43"
   license "Apache-2.0"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "6c1468b74d3e259ab8fe3c0b76956e384fd9f856600b5c00d659d12bbd4f8913" => :big_sur
-    sha256 "d4c986f2ab88a5f4351b5a5800a4e6746dc8537292efc42f2337a743381f047c" => :catalina
-    sha256 "6f471ea2d13dee328cdacb763c5319bb0101d88596f115310b78926467ac1e5b" => :mojave
+    sha256 "12072345e17af704afd9663d9e57924f1d1d9cf878b4a0eda7f9d176cc7770aa" => :big_sur
+    sha256 "2f952f87256e7b227b052fce1342d0d72803b29561cd143f1ee8a4eeead1c008" => :catalina
+    sha256 "e59d05f5292422fed9d50bb9b05e6a76e852b9ae737fd2d6ce4a222343f3594c" => :mojave
   end
 
   depends_on "python@3.9"
@@ -96,6 +97,16 @@ class Checkov < Formula
     sha256 "26215ebb157e6fb2ee74319aa4445b9f3b7e456e26be215ce19fdaaa901c20a4"
   end
 
+  resource "packaging" do
+    url "https://files.pythonhosted.org/packages/55/fd/fc1aca9cf51ed2f2c11748fa797370027babd82f87829c7a8e6dbe720145/packaging-20.4.tar.gz"
+    sha256 "4357f74f47b9c12db93624a82154e9b120fa8293699949152b22065d556079f8"
+  end
+
+  resource "pyparsing" do
+    url "https://files.pythonhosted.org/packages/c1/47/dfc9c342c9842bbe0036c7f763d2d6686bcf5eb1808ba3e170afdb282210/pyparsing-2.4.7.tar.gz"
+    sha256 "c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1"
+  end
+
   resource "python-dateutil" do
     url "https://files.pythonhosted.org/packages/be/ed/5bbc91f03fa4c839c4c7360375da77f9659af5f7086b7a7bdda65771c8e0/python-dateutil-2.8.1.tar.gz"
     sha256 "73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c"
@@ -158,12 +169,6 @@ class Checkov < Formula
 
   def install
     virtualenv_install_with_resources
-  end
-
-  def caveats
-    <<~EOS
-      cloudformation java and go plugins are installed, but the Go and Java are not bundled with the installation.
-    EOS
   end
 
   test do

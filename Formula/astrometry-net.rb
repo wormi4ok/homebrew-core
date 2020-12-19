@@ -8,6 +8,11 @@ class AstrometryNet < Formula
   license "BSD-3-Clause"
   revision 1
 
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
   bottle do
     cellar :any
     sha256 "700e922e70fab4f449c5167c376cc2105d94d72c1ffbc674cfc8a40f15527338" => :big_sur

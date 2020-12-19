@@ -14,6 +14,7 @@ class Git < Formula
 
   bottle do
     sha256 "99ffa981e42bfb6ed77fc1a9f4d1dc07681b2ba532ffc122d02b75eb002047e1" => :big_sur
+    sha256 "38b43c6daeb7bd6d4555ad62b77465a13fc61d81be51bc7976ae6d016da05288" => :arm64_big_sur
     sha256 "47cffc0d84e2a273cc6088802633e1d4d1fc8afe67633ed8487b497cd78c54f8" => :catalina
     sha256 "97cd781a7060f6c1dc456d36e6d17d68ec78470affe3fc0b1d8ff46402be6fcf" => :mojave
     sha256 "b0ad755307e1f83e0c844aeef94774e499ebb85f1e36934966ac9bb31618da61" => :high_sierra
@@ -76,14 +77,9 @@ class Git < Formula
       CFLAGS=#{ENV.cflags}
       LDFLAGS=#{ENV.ldflags}
       NO_TCLTK=1
+      NO_OPENSSL=1
+      APPLE_COMMON_CRYPTO=1
     ]
-
-    if MacOS.version < :yosemite
-      openssl_prefix = Formula["openssl@1.1"].opt_prefix
-      args += %W[NO_APPLE_COMMON_CRYPTO=1 OPENSSLDIR=#{openssl_prefix}]
-    else
-      args += %w[NO_OPENSSL=1 APPLE_COMMON_CRYPTO=1]
-    end
 
     system "make", "install", *args
 

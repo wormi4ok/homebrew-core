@@ -6,7 +6,7 @@ class Gitfs < Formula
   url "https://github.com/presslabs/gitfs/archive/0.5.2.tar.gz"
   sha256 "921e24311e3b8ea3a5448d698a11a747618ee8dd62d5d43a85801de0b111cbf3"
   license "Apache-2.0"
-  revision 4
+  revision 5
   head "https://github.com/presslabs/gitfs.git"
 
   bottle do
@@ -16,7 +16,7 @@ class Gitfs < Formula
     sha256 "218c5f19bcecb33e4f18c19cf0f56ce6d9628d4cfad9f095fbb1071af3cd79c2" => :high_sierra
   end
 
-  deprecate! because: "requires FUSE"
+  deprecate! date: "2020-11-10", because: "requires FUSE"
 
   depends_on "libgit2"
   depends_on :osxfuse

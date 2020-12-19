@@ -1,19 +1,18 @@
 class Openvdb < Formula
   desc "Sparse volume processing toolkit"
   homepage "https://www.openvdb.org/"
-  url "https://github.com/AcademySoftwareFoundation/openvdb/archive/v7.0.0.tar.gz"
-  sha256 "97bc8ae35ef7ccbf49a4e25cb73e8c2eccae6b235bac86f2150707efcd1e910d"
+  url "https://github.com/AcademySoftwareFoundation/openvdb/archive/v7.2.0.tar.gz"
+  sha256 "81ff2758e3900e5d4022fde0149d63387167db8adaf5c0ace1456dad3a012d1d"
   license "MPL-2.0"
-  revision 2
   head "https://github.com/AcademySoftwareFoundation/openvdb.git"
 
   bottle do
-    sha256 "e05fd1f0a7e1fa4c2cb9326f31ad58479102867447c2403f397ab6955c1375b8" => :big_sur
-    sha256 "a52e3f045f00380b3b3a0246d36e6f084b197df696c8b229e83772bda2ed3017" => :catalina
-    sha256 "b55dd56f20ba824ad2daa83d4ed41d656911e8b596e45f39d2ed953f04a3ac79" => :mojave
-    sha256 "a7d3e9cc992f2699b1dea70a51dbd9333b423113a1c8ca819265bbbb0df0d3ca" => :high_sierra
+    sha256 "1b74f7cf86f366e2372bd13a7afad62f54a7f9fc16c46d3be31ab0d465fbc1e9" => :big_sur
+    sha256 "b69e45be52d2f1e42bad36270c796a84ec3825aa50658d6cdfdb90fe2293af5f" => :catalina
+    sha256 "8c8c2ea3adbdf79ab39f3ab10ec99c6663260eaef0863ce28176d7491f8d8abb" => :mojave
   end
 
+  depends_on "cmake" => :build
   depends_on "doxygen" => :build
   depends_on "boost"
   depends_on "c-blosc"
@@ -29,35 +28,14 @@ class Openvdb < Formula
   end
 
   def install
-    # Adjust hard coded paths in Makefile
-    args = [
-      "DESTDIR=#{prefix}",
-      "BLOSC_INCL_DIR=#{Formula["c-blosc"].opt_include}",
-      "BLOSC_LIB_DIR=#{Formula["c-blosc"].opt_lib}",
-      "BOOST_INCL_DIR=#{Formula["boost"].opt_include}",
-      "BOOST_LIB_DIR=#{Formula["boost"].opt_lib}",
-      "BOOST_THREAD_LIB=-lboost_thread-mt",
-      "CONCURRENT_MALLOC_LIB_DIR=#{Formula["jemalloc"].opt_lib}",
-      "CPPUNIT_INCL_DIR=", # Do not use cppunit
-      "CPPUNIT_LIB_DIR=",
-      "DOXYGEN=doxygen",
-      "EXR_INCL_DIR=#{Formula["openexr"].opt_include}/OpenEXR",
-      "EXR_LIB_DIR=#{Formula["openexr"].opt_lib}",
-      "LOG4CPLUS_INCL_DIR=", # Do not use log4cplus
-      "LOG4CPLUS_LIB_DIR=",
-      "NUMPY_INCL_DIR=",
-      "PYTHON_VERSION=",
-      "TBB_INCL_DIR=#{Formula["tbb"].opt_include}",
-      "TBB_LIB_DIR=#{Formula["tbb"].opt_lib}",
-      "GLFW_INCL_DIR=#{Formula["glfw"].opt_include}",
-      "GLFW_LIB_DIR=#{Formula["glfw"].opt_lib}",
-      "GLFW_LIB=-lglfw",
+    cmake_args = [
+      "-DDISABLE_DEPENDENCY_VERSION_CHECKS=ON",
+      "-DOPENVDB_BUILD_DOCS=ON",
     ]
 
-    ENV.append_to_cflags "-I #{buildpath}"
-
-    cd "openvdb" do
-      system "make", "install", *args
+    mkdir "build" do
+      system "cmake", "..", *std_cmake_args, *cmake_args
+      system "make", "install"
     end
   end
 

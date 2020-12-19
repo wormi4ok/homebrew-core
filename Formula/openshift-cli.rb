@@ -7,12 +7,11 @@ class OpenshiftCli < Formula
       shallow:  false
   version "4.6.0"
   license "Apache-2.0"
-  head "https://github.com/openshift/oc.git",
-      shallow: false
+  head "https://github.com/openshift/oc.git", shallow: false
 
   livecheck do
     url :head
-    regex(/^openshift-clients-(\d+(?:\.\d+)+-\S*)?.*$/i)
+    regex(/^openshift-clients[._-](\d+(?:\.\d+)+)(?:[._-]p?\d+)*$/i)
   end
 
   bottle do

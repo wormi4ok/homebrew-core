@@ -6,8 +6,8 @@ class Advancemame < Formula
   license "GPL-2.0"
 
   livecheck do
-    url "https://github.com/amadvance/advancemame/releases/latest"
-    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
+    url :stable
+    strategy :github_latest
   end
 
   bottle do
@@ -28,7 +28,6 @@ class Advancemame < Formula
   conflicts_with "advancemenu", because: "both install `advmenu` binaries"
 
   def install
-    ENV.delete "SDKROOT" if MacOS.version == :yosemite
     system "./configure", "--prefix=#{prefix}"
     system "make", "install", "LDFLAGS=#{ENV.ldflags}", "mandir=#{man}", "docdir=#{doc}"
   end

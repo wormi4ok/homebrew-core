@@ -1,16 +1,25 @@
 class Gping < Formula
   desc "Ping, but with a graph"
   homepage "https://github.com/orf/gping"
-  url "https://github.com/orf/gping/archive/v0.1.7.tar.gz"
-  sha256 "5c2ff5e1d72fe1cc55b69eab073bb6ddec0fca1303313865e9c1d43bc52e85a3"
+  url "https://github.com/orf/gping/archive/v1.2.0.tar.gz"
+  sha256 "2379d2d5c3e301140d9c65c4dcc2b99602acf511b2798f45009af4c1101a0716"
   license "MIT"
   head "https://github.com/orf/gping.git"
 
+  # The GitHub repository has a "latest" release but it can sometimes point to
+  # a release like `v1.2.3-post`, `v1.2.3-post2`, etc. We're checking the Git
+  # tags because the author of `gping` requested that we omit `post` releases:
+  # https://github.com/Homebrew/homebrew-core/pull/66366#discussion_r537339032
+  livecheck do
+    url :stable
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
+  end
+
   bottle do
     cellar :any_skip_relocation
-    sha256 "ff8625f4110f7738f3c6e1b897b837e9deb3ff306b42158b11bc764ac71ddbed" => :big_sur
-    sha256 "42501a0f26107b39eeea338bb1a44e61dc21746b94f2f5c70f6585e12afd7681" => :catalina
-    sha256 "88f22a0a0afda453cc6cfc26c3f61889e980c26be42515cb1908fa2747f8e9d0" => :mojave
+    sha256 "ad76726fb0897f1960e045b31d6a080a1c699a5ebe187f1b5f3fabb1575afe90" => :big_sur
+    sha256 "c8162661b26ec98036c7abd06916867fb715f1c6b0881fe41ce7bbd292773f07" => :catalina
+    sha256 "9c0a56c20f3c378227ae9288ff6b88d0eb2f3f1cbd33dcb493226dab1b894ad8" => :mojave
   end
 
   depends_on "rust" => :build
@@ -36,8 +45,7 @@ class Gping < Formula
       replace: "")
     screenlog.gsub! /\e\[([;\d]+)?m/, ""
 
-    assert_match "Pinging", screenlog
-    assert_match "google.com", screenlog
+    assert_match "google.com (", screenlog
   ensure
     Process.kill("TERM", pid)
   end

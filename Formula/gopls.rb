@@ -1,15 +1,21 @@
 class Gopls < Formula
   desc "Language server for the Go language"
   homepage "https://github.com/golang/tools/tree/master/gopls"
-  url "https://github.com/golang/tools/archive/gopls/v0.5.3.tar.gz"
-  sha256 "f3a1c142f42c7e9cff62ec9a1a6e41e59305c7519735839ecedccf17597ae00e"
+  url "https://github.com/golang/tools/archive/gopls/v0.6.1.tar.gz"
+  sha256 "e02bd50379993220cec2c8a3ebda1214d759a547fb96daa41dbdd12d56e61a4f"
   license "BSD-3-Clause"
+
+  livecheck do
+    url :stable
+    strategy :github_latest
+    regex(%r{href=.*?/tag/(?:gopls%2F)?v?(\d+(?:\.\d+)+)["' >]}i)
+  end
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "023ac272fd82dd6b22ad86636eab63d3cb536b8e3cb95740b56495abcd2dda39" => :big_sur
-    sha256 "f8ee59eeebfcf3d7016ef0940a1c167bb5a133684e708a907995b2d2966b000b" => :catalina
-    sha256 "2bb0be3febc55e3908c4d6bba6ad10ab34f3724b243435ecdeee6c1d8dc8afbd" => :mojave
+    sha256 "a4f60e4c2e8a70aae414995319bb6b4dc5dfe4295a5d105fe0b0fcf84a02f5a9" => :big_sur
+    sha256 "a4d25c188943c90cd324b052cd43ab4560328051249f4be410dc9c5903e5b8c7" => :catalina
+    sha256 "1d79c7f315bf4e0737036293faf6c70af25d7162c463e0969915bf5c8d08d12c" => :mojave
   end
 
   depends_on "go" => :build

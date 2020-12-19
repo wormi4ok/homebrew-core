@@ -3,8 +3,8 @@ class Commitizen < Formula
 
   desc "Defines a standard way of committing rules and communicating it"
   homepage "https://commitizen-tools.github.io/commitizen/"
-  url "https://files.pythonhosted.org/packages/f8/d8/0c6ade1c0c9a07909e7667c817882a04ab0e1a2cec3c52c1f0bce0caccdc/commitizen-2.8.0.tar.gz"
-  sha256 "2b15abab1b024763339494aba07ac63b6da945fb92a688aa03e50180b666a7d7"
+  url "https://files.pythonhosted.org/packages/f0/c8/1f4086495a830a9dbb325b955d68a01a593a8a8bf54d44d0ca365bc40116/commitizen-2.11.1.tar.gz"
+  sha256 "a141ba4317256daf6b6a9f4f390cd57fc53e63df7989ba46019b10c75a101359"
   license "MIT"
   head "https://github.com/commitizen-tools/commitizen.git"
 
@@ -14,13 +14,17 @@ class Commitizen < Formula
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "f3d790e47bf459559242d0bb4750232c0c8be74aaebfb3e94c9fed79dad11e2c" => :big_sur
-    sha256 "0183c24bdc819fba668f48c3ee14e8b90ef99b6270107001c4d6871220d043fb" => :catalina
-    sha256 "9b9d7a7bb33daa21021e80bc88d9e82c954b74579bd4fff621bf682bcf13021c" => :mojave
-    sha256 "723275443aadaaa22d5812b255481b121a4b817303b9bfa78ac13af1c2a1d6d1" => :high_sierra
+    sha256 "c2804e1e1191a90b9ab30dffbeecfa9bf58b522ddc99f3ecdaa9054cb4135a1b" => :big_sur
+    sha256 "df2a8682329053d2859a393e3222c2645bdf0d8d657cd4530572262d796ff173" => :catalina
+    sha256 "e048a17052fa2b6cb1751aa5ca7c95bd4486282cd79d8cc908bda179dcebe23c" => :mojave
   end
 
   depends_on "python@3.9"
+
+  resource "argcomplete" do
+    url "https://files.pythonhosted.org/packages/cb/53/d2e3d11726367351b00c8f078a96dacb7f57aef2aca0d3b6c437afc56b55/argcomplete-1.12.2.tar.gz"
+    sha256 "de0e1282330940d52ea92a80fea2e4b9e0da1932aaa570f84d268939d1897b04"
+  end
 
   resource "colorama" do
     url "https://files.pythonhosted.org/packages/1f/bb/5d3246097ab77fa083a61bd8d3d527b7ae063c7d8e8671b1cf8c4ec10cbe/colorama-0.4.4.tar.gz"
@@ -43,8 +47,8 @@ class Commitizen < Formula
   end
 
   resource "packaging" do
-    url "https://files.pythonhosted.org/packages/55/fd/fc1aca9cf51ed2f2c11748fa797370027babd82f87829c7a8e6dbe720145/packaging-20.4.tar.gz"
-    sha256 "4357f74f47b9c12db93624a82154e9b120fa8293699949152b22065d556079f8"
+    url "https://files.pythonhosted.org/packages/d7/c5/e81b9fb8033fe78a2355ea7b1774338e1dca2c9cbd2ee140211a9e6291ab/packaging-20.8.tar.gz"
+    sha256 "78598185a7008a470d64526a8059de9aaa449238f280fc9eb6b13ba6c4109093"
   end
 
   resource "prompt-toolkit" do
@@ -63,13 +67,8 @@ class Commitizen < Formula
   end
 
   resource "questionary" do
-    url "https://files.pythonhosted.org/packages/26/4a/ef9920dc730ba84750b82e330f8b5a0f7ec292d571daa7718fd3e8a0ac8e/questionary-1.8.0.tar.gz"
-    sha256 "0f76eb389aef1048e04bec1338fec074308091446fbe92914d064c77c092a868"
-  end
-
-  resource "six" do
-    url "https://files.pythonhosted.org/packages/6b/34/415834bfdafca3c5f451532e8a8d9ba89a21c9743a0c59fbd0205c7f9426/six-1.15.0.tar.gz"
-    sha256 "30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259"
+    url "https://files.pythonhosted.org/packages/89/a5/12f446d595f3db937da1689f5ebf672bdbaa777fa0577b3e099924317f9b/questionary-1.8.1.tar.gz"
+    sha256 "f2999f01735db77a80d6cb119766cb15b84c468cab325168941a3e0d91207437"
   end
 
   resource "termcolor" do

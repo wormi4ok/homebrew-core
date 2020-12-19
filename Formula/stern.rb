@@ -1,23 +1,30 @@
 class Stern < Formula
   desc "Tail multiple Kubernetes pods & their containers"
   homepage "https://github.com/stern/stern"
-  url "https://github.com/stern/stern/archive/v1.13.0.tar.gz"
-  sha256 "17f41fb51e61ae396979c6d1007fc5dd2913e51c21c0c01f35019d94db65f1b6"
+  url "https://github.com/stern/stern/archive/v1.13.1.tar.gz"
+  sha256 "36eff0cd19bb5d60d2f6dfcecfe8afd2e95f00fff2e0e99f38eb99df11de1e61"
   license "Apache-2.0"
   head "https://github.com/stern/stern.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "0f8f6af5554f315bd5865e29df96c78227adf7dc3b760ce4405a78aef46842a5" => :big_sur
-    sha256 "d6dbc6b4d2bc279d0fe11f755ff22076275dc63f860507fea7c25b290cf4923a" => :catalina
-    sha256 "888437271eb402c05e692d69bc469d6a471c475a4f8a1c2434c097470b79ace1" => :mojave
-    sha256 "36b25df7f6bdd4efdd90bb379e00e423da5e1123151c040b707cbf3f0f049d09" => :high_sierra
+    rebuild 1
+    sha256 "fcb10818d0cbb75c642f304c81d22176a010a42ee60a9c4a1853129380ae5805" => :big_sur
+    sha256 "f42887e06595cc6f75e4600860f7795c71b5582476307c5222d612aed2a8c018" => :catalina
+    sha256 "f2bcd849ee63b84a23c8d2ed75ad123d70af5d73a7456feba9c332399f42658f" => :mojave
   end
 
   depends_on "go" => :build
 
   def install
     system "go", "build", "-ldflags", "-s -w -X github.com/stern/stern/cmd.version=#{version}", *std_go_args
+
+    # Install shell completion
+    output = Utils.safe_popen_read("#{bin}/stern", "--completion=bash")
+    (bash_completion/"stern").write output
+
+    output = Utils.safe_popen_read("#{bin}/stern", "--completion=zsh")
+    (zsh_completion/"_stern").write output
   end
 
   test do

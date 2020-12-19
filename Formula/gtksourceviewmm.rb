@@ -3,7 +3,8 @@ class Gtksourceviewmm < Formula
   homepage "https://developer.gnome.org/gtksourceviewmm/"
   url "https://download.gnome.org/sources/gtksourceviewmm/2.10/gtksourceviewmm-2.10.3.tar.xz"
   sha256 "0000df1b582d7be2e412020c5d748f21c0e6e5074c6b2ca8529985e70479375b"
-  revision 6
+  license "LGPL-2.1-or-later"
+  revision 9
 
   livecheck do
     url :stable
@@ -12,11 +13,9 @@ class Gtksourceviewmm < Formula
 
   bottle do
     cellar :any
-    sha256 "9bbf7ed611ac6f4771c02cb2b74cb5f3b3b66bfd75e5342eaafbd21e97db8500" => :big_sur
-    sha256 "11a112b786ce66947f6a9a0988d7ecafe62360492e0bab36490bb9bf63e50a17" => :catalina
-    sha256 "3cc10eb3380492729132b0518d0ad95ab81cd88ece8b871ddb139c0517f89a41" => :mojave
-    sha256 "4b1dfd6e1b0a4a78e33f49a4fdf95b1d880bc2148049be74fa6b5b8cb8532372" => :high_sierra
-    sha256 "f7d4623be50ab3901c895998c87b1d5719aff1d2e92f5974a98f71d5f5ed6911" => :sierra
+    sha256 "8accd4b62e2a81b42a17acfbae054e81e8c25a9c02c5223c52d1890290731219" => :big_sur
+    sha256 "b18df29fc3f1e2b0458530ca9132da65ede64c461411021dfbfcc2c81d0d231b" => :catalina
+    sha256 "7922e406c8d456752fdab0dce85355adcaa024bc26b9376c5fbf32820789df0c" => :mojave
   end
 
   depends_on "pkg-config" => :build
@@ -42,13 +41,13 @@ class Gtksourceviewmm < Formula
     atk = Formula["atk"]
     atkmm = Formula["atkmm"]
     cairo = Formula["cairo"]
-    cairomm = Formula["cairomm"]
+    cairomm = Formula["cairomm@1.14"]
     fontconfig = Formula["fontconfig"]
     freetype = Formula["freetype"]
     gdk_pixbuf = Formula["gdk-pixbuf"]
     gettext = Formula["gettext"]
     glib = Formula["glib"]
-    glibmm = Formula["glibmm"]
+    glibmm = Formula["glibmm@2.64"]
     gtkx = Formula["gtk+"]
     gtkmm = Formula["gtkmm"]
     gtksourceview = Formula["gtksourceview"]
@@ -61,6 +60,7 @@ class Gtksourceviewmm < Formula
     flags = %W[
       -I#{atk.opt_include}/atk-1.0
       -I#{atkmm.opt_include}/atkmm-1.6
+      -I#{atkmm.opt_lib}/atkmm-1.6/include
       -I#{cairo.opt_include}/cairo
       -I#{cairomm.opt_include}/cairomm-1.0
       -I#{cairomm.opt_lib}/cairomm-1.0/include

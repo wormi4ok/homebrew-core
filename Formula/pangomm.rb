@@ -1,10 +1,10 @@
 class Pangomm < Formula
   desc "C++ interface to Pango"
   homepage "https://www.pango.org/"
-  url "https://download.gnome.org/sources/pangomm/2.42/pangomm-2.42.1.tar.xz"
-  sha256 "14bf04939930870d5cfa96860ed953ad2ce07c3fd8713add4a1bfe585589f40f"
+  url "https://download.gnome.org/sources/pangomm/2.42/pangomm-2.42.2.tar.xz"
+  sha256 "1b24c92624ae1275ccb57758175d35f7c39ad3342d8c0b4ba60f0d9849d2d08a"
   license "LGPL-2.1-only"
-  revision 2
+  revision 1
 
   livecheck do
     url :stable
@@ -12,21 +12,26 @@ class Pangomm < Formula
 
   bottle do
     cellar :any
-    sha256 "9dc75bd5d85a445f17d6245e555e5b72e5e479cd00c1e8e4afea94431762c3b4" => :big_sur
-    sha256 "b76cf574756211f73f6145ce57738e47c20740bbced59243526580ac97c639bf" => :catalina
-    sha256 "4c656b17af2dd884085c70493389a5d4c415d9631a6dedb1b88b964bf6e05aca" => :mojave
-    sha256 "ab43bb783b24993470dbb96fa3ac1e75cbfc641e7ac477cb492d2dbecce25091" => :high_sierra
+    sha256 "efb06bb056de6e880375293435bcf1e516faa7e411b8461f0160519a6ab46ba6" => :big_sur
+    sha256 "643ed5e66d794ba18276bc516c76655765a9adbdbf5701942ff811936f95550c" => :catalina
+    sha256 "f09fc33e309cf58d7f573dbce385ec8a39a12927d305e7243b5d79b9f39f6a1d" => :mojave
   end
 
+  depends_on "meson" => :build
+  depends_on "ninja" => :build
   depends_on "pkg-config" => :build
-  depends_on "cairomm"
-  depends_on "glibmm"
+  depends_on "cairomm@1.14"
+  depends_on "glibmm@2.64"
   depends_on "pango"
 
   def install
     ENV.cxx11
-    system "./configure", "--disable-dependency-tracking", "--prefix=#{prefix}"
-    system "make", "install"
+
+    mkdir "build" do
+      system "meson", *std_meson_args, ".."
+      system "ninja"
+      system "ninja", "install"
+    end
   end
   test do
     (testpath/"test.cpp").write <<~EOS
@@ -38,12 +43,12 @@ class Pangomm < Formula
       }
     EOS
     cairo = Formula["cairo"]
-    cairomm = Formula["cairomm"]
+    cairomm = Formula["cairomm@1.14"]
     fontconfig = Formula["fontconfig"]
     freetype = Formula["freetype"]
     gettext = Formula["gettext"]
     glib = Formula["glib"]
-    glibmm = Formula["glibmm"]
+    glibmm = Formula["glibmm@2.64"]
     harfbuzz = Formula["harfbuzz"]
     libpng = Formula["libpng"]
     libsigcxx = Formula["libsigc++@2"]

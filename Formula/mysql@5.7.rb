@@ -6,15 +6,15 @@ class MysqlAT57 < Formula
   license "GPL-2.0"
 
   livecheck do
-    url "https://dev.mysql.com/downloads/mysql/5.7.html"
-    regex(/href=.*?mysql[._-]v?(\d+.\d+.\d+)-/i)
+    url "https://dev.mysql.com/downloads/mysql/5.7.html?tpl=files&os=src&version=5.7"
+    regex(/href=.*?mysql[._-](?:boost[._-])?v?(5\.7(?:\.\d+)*)\.t/i)
   end
 
   bottle do
-    sha256 "f073e9bd8b3550d7cf4fd9279182b6830b53d1838b7d2301ee9b60bf36b573fd" => :big_sur
-    sha256 "b941e1c492c340e737423badddd648b267e33a8cdc865f4f2935001d5f8a6e7d" => :catalina
-    sha256 "d0a660aff0c0919206fad22432af8174985035b40889fddb15c8f4aa3c0b2b69" => :mojave
-    sha256 "46ecc776de40f0da06a82ad0018d33c6fd27a9924ea4df8ddd17970c06fa52f6" => :high_sierra
+    rebuild 2
+    sha256 "d698d7de62f5d7d3eef93c04c3ac2b7ba0aa2081f31f6617972b6c88a18a95e5" => :big_sur
+    sha256 "1bf3050f0ed024f54538ccf95d96a41536ab54d87e303d802f32b5c149eb8eb7" => :catalina
+    sha256 "0240b57da7513b0082d251cc314a27022842fd588092a22088cd14eec9f1cc86" => :mojave
   end
 
   keg_only :versioned_formula
@@ -49,6 +49,7 @@ class MysqlAT57 < Formula
       -DWITH_BOOST=boost
       -DWITH_EDITLINE=system
       -DWITH_SSL=yes
+      -DWITH_NUMA=OFF
       -DWITH_UNIT_TESTS=OFF
       -DWITH_EMBEDDED_SERVER=ON
       -DENABLED_LOCAL_INFILE=1
@@ -87,6 +88,8 @@ class MysqlAT57 < Formula
   end
 
   def post_install
+    return if ENV["CI"]
+
     # Make sure the datadir exists
     datadir.mkpath
     unless (datadir/"mysql/general_log.CSM").exist?

@@ -1,9 +1,9 @@
 class Gtkmm3 < Formula
   desc "C++ interfaces for GTK+ and GNOME"
   homepage "https://www.gtkmm.org/"
-  url "https://download.gnome.org/sources/gtkmm/3.24/gtkmm-3.24.2.tar.xz"
-  sha256 "6d71091bcd1863133460d4188d04102810e9123de19706fb656b7bb915b4adc3"
-  license "LGPL-2.1"
+  url "https://download.gnome.org/sources/gtkmm/3.24/gtkmm-3.24.3.tar.xz"
+  sha256 "60497c4f7f354c3bd2557485f0254f8b7b4cf4bebc9fee0be26a77744eacd435"
+  license "LGPL-2.1-or-later"
   revision 1
 
   livecheck do
@@ -13,22 +13,27 @@ class Gtkmm3 < Formula
 
   bottle do
     cellar :any
-    sha256 "373d7342c65f7286481b88fdcd96ad24daebe0f07a40bcaa95495c87ddf1e66a" => :big_sur
-    sha256 "c656b3844e5e94f34556e5b8b0b6ee3099e7a2c1b96c839229bbc9997c18218d" => :catalina
-    sha256 "12efd715a1422f80321a2af07a6d82d1e95772b4c23dea90d8138e3a22475886" => :mojave
-    sha256 "2183abaf056161d4d13d8bd86fc5795b3e32caf3db7c1a4b8a44eba320104402" => :high_sierra
+    sha256 "cb8ac56b6572b5323470e93ba85bde294276ec202e58dc9624dac7ce8094c8d0" => :big_sur
+    sha256 "b5f20982021f75d0c7f2f7bdb798fb8579d101b02bb64185b972df990b790f54" => :catalina
+    sha256 "90944972e1ceaf6bee610fbb757a8a3ddb8d5c47238a9c557385fbb15a5806d5" => :mojave
   end
 
+  depends_on "meson" => :build
+  depends_on "ninja" => :build
   depends_on "pkg-config" => :build
   depends_on "atkmm"
+  depends_on "cairomm@1.14"
   depends_on "gtk+3"
   depends_on "pangomm"
 
   def install
     ENV.cxx11
 
-    system "./configure", "--disable-silent-rules", "--disable-dependency-tracking", "--prefix=#{prefix}"
-    system "make", "install"
+    mkdir "build" do
+      system "meson", *std_meson_args, ".."
+      system "ninja"
+      system "ninja", "install"
+    end
   end
 
   test do
@@ -44,13 +49,13 @@ class Gtkmm3 < Formula
     atk = Formula["atk"]
     atkmm = Formula["atkmm"]
     cairo = Formula["cairo"]
-    cairomm = Formula["cairomm"]
+    cairomm = Formula["cairomm@1.14"]
     fontconfig = Formula["fontconfig"]
     freetype = Formula["freetype"]
     gdk_pixbuf = Formula["gdk-pixbuf"]
     gettext = Formula["gettext"]
     glib = Formula["glib"]
-    glibmm = Formula["glibmm"]
+    glibmm = Formula["glibmm@2.64"]
     gtkx3 = Formula["gtk+3"]
     harfbuzz = Formula["harfbuzz"]
     libepoxy = Formula["libepoxy"]
@@ -62,6 +67,7 @@ class Gtkmm3 < Formula
     flags = %W[
       -I#{atk.opt_include}/atk-1.0
       -I#{atkmm.opt_include}/atkmm-1.6
+      -I#{atkmm.opt_lib}/atkmm-1.6/include
       -I#{cairo.opt_include}/cairo
       -I#{cairomm.opt_include}/cairomm-1.0
       -I#{cairomm.opt_lib}/cairomm-1.0/include

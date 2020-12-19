@@ -4,18 +4,18 @@ class Pcl < Formula
   url "https://github.com/PointCloudLibrary/pcl/archive/pcl-1.11.1.tar.gz"
   sha256 "a61558e53abafbc909e0996f91cfd2d7a400fcadf6b8cfb0ea3172b78422c74e"
   license "BSD-3-Clause"
-  revision 5
+  revision 6
   head "https://github.com/PointCloudLibrary/pcl.git"
 
   bottle do
-    sha256 "4a31daa4b0cd99583ceb02ed6885945e42fc8d69081623970b69f6b8ca7b112e" => :big_sur
-    sha256 "4f30eecbee45043aa60e6b31d19d3ab012299a59ab1ac0fd816679fc3a412476" => :catalina
-    sha256 "332c08a85c3e459650c6be71f4e849b964a93ac918264bbda41c3bb0befefefe" => :mojave
-    sha256 "d5c26da04bbc6ef6b9bbcbb08b81feca2f6ac4decc20641d77946069931623f4" => :high_sierra
+    rebuild 1
+    sha256 "db95dcf60bc3b6eab79216fb3227c4292c02456a040b2afed8d1df8ed71db425" => :big_sur
+    sha256 "a52366014ad295a1a84cf2a8c0a5e235060b7439800f02c2be9c6910068c2a0b" => :catalina
+    sha256 "15ba785bb114e75af88dda821841e8f1a3461d36cf7731915de93e68811fbb2a" => :mojave
   end
 
   depends_on "cmake" => [:build, :test]
-  depends_on "pkg-config" => :build
+  depends_on "pkg-config" => [:build, :test]
   depends_on "boost"
   depends_on "cminpack"
   depends_on "eigen"

@@ -1,8 +1,8 @@
 class FluentBit < Formula
   desc "Data Collector for IoT"
   homepage "https://github.com/fluent/fluent-bit"
-  url "https://github.com/fluent/fluent-bit/archive/v1.6.5.tar.gz"
-  sha256 "3c1d0db7d76ac357bb183f872b71b3534e367b3ee4cfb18109039ed4b3d43623"
+  url "https://github.com/fluent/fluent-bit/archive/v1.6.9.tar.gz"
+  sha256 "fb39b3aa92e673f80bbb29ceaf67aa46ad2b90885f0f3ac49b9489f34e7ddda4"
   license "Apache-2.0"
   head "https://github.com/fluent/fluent-bit.git"
 
@@ -13,9 +13,9 @@ class FluentBit < Formula
 
   bottle do
     cellar :any
-    sha256 "a8e1b2d2cba528d3a8d3bfa6e1cdc970b4c1cd9a026bf244afbdcd25dc7a8aec" => :big_sur
-    sha256 "d09504ae0d5898e9c37bd69b6c6789c0dd2b9edc877352a45c4cf92a0cf79e36" => :catalina
-    sha256 "bbb8b1961637515db490f813dcbdab24a4d76ea1bcf48344292d74bda072f6d0" => :mojave
+    sha256 "3e0bd4c685abfcb34a5c4dd7ff3dfc4637aab7a5fd49d4e79ecc4a58dcc2d69a" => :big_sur
+    sha256 "f6680841689ed0fcc769d13312900bb3cf05a995c51e757e4ad61cc8b8d9ae01" => :catalina
+    sha256 "39502cff7fd4466b90c5ce6f3586ac25809ee098a619976dc45ed1b23f923653" => :mojave
   end
 
   depends_on "bison" => :build

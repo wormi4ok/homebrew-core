@@ -1,22 +1,22 @@
 class Protobuf < Formula
   desc "Protocol buffers (Google's data interchange format)"
   homepage "https://github.com/protocolbuffers/protobuf/"
-  url "https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protobuf-all-3.13.0.tar.gz"
-  sha256 "465fd9367992a9b9c4fba34a549773735da200903678b81b25f367982e8df376"
+  url "https://github.com/protocolbuffers/protobuf/releases/download/v3.14.0/protobuf-all-3.14.0.tar.gz"
+  sha256 "6dd0f6b20094910fbb7f1f7908688df01af2d4f6c5c21331b9f636048674aebf"
   license "BSD-3-Clause"
-  revision 1
 
   livecheck do
-    url "https://github.com/protocolbuffers/protobuf/releases/latest"
-    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
+    url :stable
+    strategy :github_latest
   end
 
   bottle do
     cellar :any
-    sha256 "e76da791553f4576ebe7142b41a4d04df6d8ed44fb6f98b271e43334d3322eef" => :big_sur
-    sha256 "10df8a94c8077b4d2578e4db9410b586b865e4299cd6e7199993ca1c5a88af97" => :catalina
-    sha256 "ddef4d788c58c5e94007403fab456bd46ebdb631b0929289876bcb9c6b7483c1" => :mojave
-    sha256 "b7a53da8093a922302da1f34e85fe647f3d6250e7c4d56b5777d1391ee534e93" => :high_sierra
+    rebuild 1
+    sha256 "b06e8c4247465d7773a359eeeaa39385e564fefab77dbbb245ac928eea334ce9" => :big_sur
+    sha256 "d552ba31a02e48f9eaba685dc56955a7ff5620283f3763bab684b9fe07b81042" => :arm64_big_sur
+    sha256 "8d53111626404e2b4f27718127a313dceea600a74a4d38ffe0870812d8f57eb4" => :catalina
+    sha256 "0070627fe9b8c1818e54480c272cc00fa71bd5bd944b04d37ebe2e31604cb9c9" => :mojave
   end
 
   head do
@@ -29,9 +29,19 @@ class Protobuf < Formula
 
   depends_on "python@3.9" => [:build, :test]
 
+  conflicts_with "percona-server", "percona-xtrabackup",
+    because: "both install libprotobuf(-lite) libraries"
+
   resource "six" do
     url "https://files.pythonhosted.org/packages/6b/34/415834bfdafca3c5f451532e8a8d9ba89a21c9743a0c59fbd0205c7f9426/six-1.15.0.tar.gz"
     sha256 "30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259"
+  end
+
+  # Fix build on Big Sur, remove in next version
+  # https://github.com/protocolbuffers/protobuf/pull/8126
+  patch do
+    url "https://github.com/atomiix/protobuf/commit/d065bd6910a0784232dbbbfd3e5806922d69c622.patch?full_index=1"
+    sha256 "5433b6247127f9ca622b15c9f669efbaac830fa717ed6220081bc1fc3c735f91"
   end
 
   def install

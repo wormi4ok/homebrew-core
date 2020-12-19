@@ -3,7 +3,8 @@ class Gtkmm < Formula
   homepage "https://www.gtkmm.org/"
   url "https://download.gnome.org/sources/gtkmm/2.24/gtkmm-2.24.5.tar.xz"
   sha256 "0680a53b7bf90b4e4bf444d1d89e6df41c777e0bacc96e9c09fc4dd2f5fe6b72"
-  revision 3
+  license "LGPL-2.1-or-later"
+  revision 6
 
   livecheck do
     url :stable
@@ -12,17 +13,15 @@ class Gtkmm < Formula
 
   bottle do
     cellar :any
-    sha256 "6f01b168170de0eb9ac1bb25ea1146885624c80bf91d4c57cf6f6924ff3b54d7" => :big_sur
-    sha256 "172050b87d5a7d4cd945722d80d5a8c933ed6329ad130ba9f92c0705a44acbbd" => :catalina
-    sha256 "bfa9c862a46b1ca66466e30ba6dfcb74bf69a345089aba76f6620f6aa28b69dc" => :mojave
-    sha256 "160a917c60ae9f41117f297a3bc8933fffb0084edccb6113fc7510798ad01d3e" => :high_sierra
-    sha256 "d525d513745bb81d43bcd3b43fc7067f64a8425640c9e1a959e94bd2c7d4eee9" => :sierra
+    sha256 "22f9dd4edfe7a32ec44dcaac390861b814bfd14da4ca7031f881e77f07d17b8f" => :big_sur
+    sha256 "e2303030b6d6e7328f341b7191a3271a68a66ad928a3826da7ad6207ed7655eb" => :catalina
+    sha256 "8cc3218e38411123c4cea21186157be588fb4af7b244623950fe04ab2ad30890" => :mojave
   end
 
   depends_on "pkg-config" => :build
   depends_on "atkmm"
-  depends_on "cairomm"
-  depends_on "glibmm"
+  depends_on "cairomm@1.14"
+  depends_on "glibmm@2.64"
   depends_on "gtk+"
   depends_on "libsigc++@2"
   depends_on "pangomm"
@@ -45,13 +44,13 @@ class Gtkmm < Formula
     atk = Formula["atk"]
     atkmm = Formula["atkmm"]
     cairo = Formula["cairo"]
-    cairomm = Formula["cairomm"]
+    cairomm = Formula["cairomm@1.14"]
     fontconfig = Formula["fontconfig"]
     freetype = Formula["freetype"]
     gdk_pixbuf = Formula["gdk-pixbuf"]
     gettext = Formula["gettext"]
     glib = Formula["glib"]
-    glibmm = Formula["glibmm"]
+    glibmm = Formula["glibmm@2.64"]
     gtkx = Formula["gtk+"]
     harfbuzz = Formula["harfbuzz"]
     libpng = Formula["libpng"]
@@ -62,6 +61,7 @@ class Gtkmm < Formula
     flags = %W[
       -I#{atk.opt_include}/atk-1.0
       -I#{atkmm.opt_include}/atkmm-1.6
+      -I#{atkmm.opt_lib}/atkmm-1.6/include
       -I#{cairo.opt_include}/cairo
       -I#{cairomm.opt_include}/cairomm-1.0
       -I#{cairomm.opt_lib}/cairomm-1.0/include
