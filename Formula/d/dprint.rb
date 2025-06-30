@@ -1,8 +1,8 @@
 class Dprint < Formula
   desc "Pluggable and configurable code formatting platform written in Rust"
   homepage "https://dprint.dev/"
-  url "https://github.com/dprint/dprint/archive/refs/tags/0.50.0.tar.gz"
-  sha256 "28a9538c293a1cbe2af8241d687c44309dd1aa1c514c6a937ef3c25699dce4ea"
+  url "https://github.com/dprint/dprint/archive/refs/tags/0.50.1.tar.gz"
+  sha256 "85197a9469fe479fc278e77e87ede6eeb55b7d42d0a530e8b828f3ab9b213358"
   license "MIT"
   head "https://github.com/dprint/dprint.git", branch: "main"
 
@@ -17,6 +17,9 @@ class Dprint < Formula
   end
 
   depends_on "rust" => :build
+
+  # bump cc crate
+  patch :DATA
 
   def install
     system "cargo", "install", *std_cargo_args(path: "crates/dprint")
@@ -60,3 +63,21 @@ class Dprint < Formula
     assert_match "dprint #{version}", shell_output("#{bin}/dprint --version")
   end
 end
+
+__END__
+diff --git a/Cargo.lock b/Cargo.lock
+index 9a1bc87..0742693 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -312,9 +312,9 @@ dependencies = [
+
+ [[package]]
+ name = "cc"
+-version = "1.2.2"
++version = "1.2.27"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "f34d93e62b03caf570cccc334cbc6c2fceca82f39211051345108adcba3eebdc"
++checksum = "d487aa071b5f64da6f19a3e848e3578944b726ee5a4854b82172f02aa876bfdc"
+ dependencies = [
+  "jobserver",
+  "libc",
